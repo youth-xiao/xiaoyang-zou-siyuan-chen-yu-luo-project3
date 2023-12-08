@@ -1,8 +1,8 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const tweetApi = require("./server/tweet.server");
 const userApi = require("./server/user.server");
 const cors = require("cors");
-const mongoose = require("mongoose");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 
@@ -24,7 +24,7 @@ app.use("/api/user", userApi);
 //     response.send("This is a POST request")
 // })
 
-const MONGO_CONNECTION_STRING = "UPDATE MONGODB CONNECTION STRING HERE";
+const MONGO_CONNECTION_STRING = "";
 
 mongoose.connect(MONGO_CONNECTION_STRING, { useNewUrlParser: true });
 const db = mongoose.connection;

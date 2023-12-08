@@ -3,6 +3,11 @@ const router = express.Router();
 
 const UserAccessor = require("./db/user.model");
 
+router.get("/", async function (request, response) {
+    const foundUser = await UserAccessor.getAllUser();
+    return response.json(foundUser);
+});
+
 router.post("/", async function (request, response) {
     const body = request.body;
     const username = body.username;
@@ -19,7 +24,7 @@ router.post("/", async function (request, response) {
 
     const createdUser = await UserAccessor.insertUser(newUser);
 
-    response.cookie("username", receivedUser.username);
+    response.cookie("username", createdUser.username);
 
     response.json("Successfully created new user " + createdUser.username);
 });

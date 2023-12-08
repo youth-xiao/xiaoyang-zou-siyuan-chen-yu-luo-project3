@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-const TweetSchema = require("./user.schema").TweetSchema;
-const TweetModel = mongoose.model("UserSchema", TweetSchema);
+const TweetSchema = require("./tweet.schema").TweetSchema;
+const TweetModel = mongoose.model("TweetSchema", TweetSchema);
 
 function insertTweet(tweet) {
     return TweetModel.create(tweet);

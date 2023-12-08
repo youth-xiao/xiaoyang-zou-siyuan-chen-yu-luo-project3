@@ -10,6 +10,10 @@ function getUserByUsername(username) {
     return UserModel.findOne({ username: username }).exec();
 }
 
+function getAllUser() {
+    return UserModel.find().exec();
+}
+
 // User1 - p: 1234 - createdDate: 12/05
 // User2 - p: 2345 - createdDate: 12/05
 // User3 - p: 3456 - createdDate: 12/01
@@ -18,4 +22,5 @@ function getUserByUsername(username) {
 module.exports = {
     insertUser,
     getUserByUsername,
+    getAllUser,
 };

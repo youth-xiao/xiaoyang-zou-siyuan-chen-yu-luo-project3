@@ -22,5 +22,3 @@ exports.UserSchema = new Schema(
     },
     { collection: "userTable" }
 );
-
-//Date.now()

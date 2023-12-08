@@ -2,7 +2,6 @@
     "name": "project3-twitter",
     "private": true,
     "version": "0.0.0",
-    "type": "module",
     "main": "server.js",
     "proxy": "http://localhost:3500",
     "scripts": {
