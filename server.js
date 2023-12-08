@@ -1,6 +1,5 @@
 const express = require("express");
-const helper = require("./server/helper");
-const pokemonApi = require("./server/pokemon.server");
+const tweetApi = require("./server/tweet.server");
 const userApi = require("./server/user.server");
 const cors = require("cors");
 const mongoose = require("mongoose");
@@ -14,12 +13,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.use("/api/pokemon", pokemonApi);
+app.use("/api/pokemon", tweetApi);
 app.use("/api/user", userApi);
-
-// app.get('/', function(request, response) {
-//     response.send(helper.generateRandomResponse())
-// })
 
 // app.get('/', function(request, response) {
 //     response.send("This is the second app GET request");
@@ -37,7 +32,6 @@ const db = mongoose.connection;
 db.on("error", console.error.bind(console, "Error connecting to MongoDB:"));
 
 let frontend_dir = path.join(__dirname, "dist");
-
 app.use(express.static(frontend_dir));
 app.get("*", function (req, res) {
     console.log("received request");
