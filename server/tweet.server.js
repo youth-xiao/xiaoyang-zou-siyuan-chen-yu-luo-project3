@@ -20,7 +20,7 @@ router.post("/", async function (request, response) {
     }
 
     const newTweet = {
-        name: username,
+        username: username,
         content: content,
     };
 
