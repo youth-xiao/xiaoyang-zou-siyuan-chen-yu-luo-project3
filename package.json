@@ -1,28 +1,37 @@
 {
-  "name": "project3-twitter",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "prop-types": "^15.8.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.20.1"
-  },
-  "devDependencies": {
-    "@types/react": "^18.2.37",
-    "@types/react-dom": "^18.2.15",
-    "@vitejs/plugin-react": "^4.2.0",
-    "eslint": "^8.53.0",
-    "eslint-plugin-react": "^7.33.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.4",
-    "vite": "^5.0.0"
-  }
+    "name": "project3-twitter",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "main": "server.js",
+    "proxy": "http://localhost:3500",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+        "preview": "vite preview",
+        "start": "nodemon server.js",
+        "prod": "node server.js"
+    },
+    "dependencies": {
+        "axios": "^1.6.2",
+        "cookie-parser": "^1.4.6",
+        "cors": "^2.8.5",
+        "express": "^4.18.2",
+        "mongoose": "^8.0.3",
+        "prop-types": "^15.8.1",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-router-dom": "^6.20.1"
+    },
+    "devDependencies": {
+        "@types/react": "^18.2.37",
+        "@types/react-dom": "^18.2.15",
+        "@vitejs/plugin-react": "^4.2.0",
+        "eslint": "^8.53.0",
+        "eslint-plugin-react": "^7.33.2",
+        "eslint-plugin-react-hooks": "^4.6.0",
+        "eslint-plugin-react-refresh": "^0.4.4",
+        "vite": "^5.0.0"
+    }
 }
