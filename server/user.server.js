@@ -1,13 +1,21 @@
 const express = require("express");
 const router = express.Router();
 
+const bycrpt = require("bcryptjs");
+
 const UserAccessor = require("./db/user.model");
 
+/**
+ * Get all registered users
+ */
 router.get("/", async function (request, response) {
     const foundUser = await UserAccessor.getAllUser();
     return response.json(foundUser);
 });
 
+/**
+ * Create a new user (with unique username and encrypted password)
+ */
 router.post("/", async function (request, response) {
     const body = request.body;
     const username = body.username;
@@ -16,19 +24,32 @@ router.post("/", async function (request, response) {
         response.status(401);
         return response.send("Incomplete request");
     }
-
+    hashedPassword = bycrpt.hashSync(password, 10);
     const newUser = {
         username: username,
-        password: password,
+        password: hashedPassword,
     };
 
-    const createdUser = await UserAccessor.insertUser(newUser);
-
-    response.cookie("username", createdUser.username);
-
-    response.json("Successfully created new user " + createdUser.username);
+    try {
+        const createdUser = await UserAccessor.insertUser(newUser);
+        response.cookie("username", createdUser.username);
+        return response.json("Successfully created new user " + createdUser.username);
+    } catch (error) {
+        if (error.code === 11000 && error.keyPattern && error.keyPattern.username) {
+            // Error code 11000 indicates a duplicate key (unique constraint) violation
+            response.status(400);
+            return response.send("Username is already taken.");
+        } else {
+            // Handle other errors
+            response.status(500);
+            return response.send("Error creating user.");
+        }
+    }
 });
 
+/**
+ * Login with username and password
+ */
 router.post("/login", async function (request, response) {
     const body = request.body;
     const username = body.username;
@@ -39,17 +60,13 @@ router.post("/login", async function (request, response) {
     }
 
     const receivedUser = await UserAccessor.getUserByUsername(username);
-
     if (!receivedUser) {
         response.status(404);
         return response.send("No user with username " + username);
     }
 
-    const isValidPassword = password === receivedUser.password;
-
-    if (isValidPassword) {
+    if (bycrpt.compareSync(password, receivedUser.password)) {
         response.cookie("username", receivedUser.username);
-
         response.status(200);
         return response.send({ loggedIn: true });
     } else {
@@ -58,11 +75,18 @@ router.post("/login", async function (request, response) {
     }
 });
 
+/**
+ * Logout user, reset cookies.username
+ */
 router.post("/logout", async function (request, response) {
-    response.clearCookie("username"); // this doesn't delete the cookie, but expires it immediately
+    // this doesn't delete the cookie, but expires it immediately
+    response.clearCookie("username");
     response.send();
 });
 
+/**
+ * Test if the user is logged in
+ */
 router.get("/isLoggedIn", function (request, response) {
     const username = request.cookies.username;
 

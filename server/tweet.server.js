@@ -5,18 +5,15 @@ const TweetAccessor = require("./db/tweet.model");
 
 router.post("/", async function (request, response) {
     const username = request.cookies.username;
-
     if (!username) {
         response.status(400);
-        return response.send("Users need to be logged in to create a new tweet");
+        return response.send("Users need to be logged in to create a new tweet.");
     }
 
-    const body = request.body;
-    const content = body.content;
-
+    const content = request.body.content;
     if (!content) {
         response.status(400);
-        return response.send("Missing tweet content");
+        return response.send("Missing tweet content.");
     }
 
     const newTweet = {
@@ -25,7 +22,6 @@ router.post("/", async function (request, response) {
     };
 
     const createdTweet = await TweetAccessor.insertTweet(newTweet);
-
     response.json(createdTweet);
 });
 
