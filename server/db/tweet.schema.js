@@ -4,7 +4,6 @@ exports.TweetSchema = new Schema(
     {
         username: {
             type: String,
-            unique: true,
             required: true,
         },
         content: {
