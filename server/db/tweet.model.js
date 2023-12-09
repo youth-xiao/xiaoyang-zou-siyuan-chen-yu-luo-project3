@@ -7,7 +7,7 @@ function insertTweet(tweet) {
 }
 
 function findTweetByUsername(username) {
-    return TweetModel.findOne({ username: username }).exec();
+    return TweetModel.find({ username: username }).exec();
 }
 
 function getAllTweet() {
