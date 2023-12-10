@@ -14,8 +14,16 @@ function getAllTweet() {
     return TweetModel.find().exec();
 }
 
+function updateTweetById(tweetId, updatedContent) {
+    return TweetModel.findByIdAndUpdate(tweetId, { content: updatedContent }, { new: true }).exec();
+}
+
 function findTweetById(id) {
     return TweetModel.findById(id).exec();
+}
+
+function deleteTweetById(tweetId) {
+    return TweetModel.findByIdAndDelete(tweetId).exec();
 }
 
 module.exports = {
@@ -23,4 +31,6 @@ module.exports = {
     findTweetByUsername,
     getAllTweet,
     findTweetById,
+    updateTweetById,
+    deleteTweetById,
 };
