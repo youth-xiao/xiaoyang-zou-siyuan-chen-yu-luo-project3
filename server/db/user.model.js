@@ -14,6 +14,15 @@ function getAllUser() {
     return UserModel.find().exec();
 }
 
+async function updateUserDescription(username, newDescription) {
+    try {
+        const updatedUser = await UserModel.findOneAndUpdate({ username: username }, { $set: { description: newDescription } }, { new: true }).exec();
+        return updatedUser;
+    } catch (error) {
+        throw error;
+    }
+}
+
 // User1 - p: 1234 - createdDate: 12/05
 // User2 - p: 2345 - createdDate: 12/05
 // User3 - p: 3456 - createdDate: 12/01
@@ -23,4 +32,5 @@ module.exports = {
     insertUser,
     getUserByUsername,
     getAllUser,
+    updateUserDescription,
 };
