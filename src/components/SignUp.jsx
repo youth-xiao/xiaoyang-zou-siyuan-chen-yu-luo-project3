@@ -1,26 +1,26 @@
-import { useState } from 'react';
-import PropTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom';
-import '../styling/Login.css';
+import { useState } from "react";
+import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
+import "../styling/Login.css";
 
 const SignUp = ({ handleSignUp }) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const onSubmit = async (e) => {
     e.preventDefault();
     if (!username || !password) {
-      setError('Please fill in all fields');
+      setError("Please fill in all fields");
       return;
     }
-    setError('');
+    setError("");
     const wasSuccessful = await handleSignUp(username, password);
     if (wasSuccessful) {
-      navigate('/');
+      navigate("/");
     } else {
-      setError('Failed to sign up. Please try again.');
+      setError("Failed to sign up. Please try again.");
     }
   };
 
@@ -52,7 +52,9 @@ const SignUp = ({ handleSignUp }) => {
           />
         </div>
 
-        <button type="submit" className="sign-up-button">Sign Up</button>
+        <button type="submit" className="sign-up-button">
+          Sign Up
+        </button>
       </form>
     </div>
   );
