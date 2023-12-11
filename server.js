@@ -24,7 +24,7 @@ app.use("/api/user", userApi);
 //     response.send("This is a POST request")
 // })
 
-const MONGO_CONNECTION_STRING = "";
+const MONGO_CONNECTION_STRING = "mongodb+srv://meredith:banana2@twitterdb.6v52nmt.mongodb.net/?retryWrites=true&w=majority";
 
 mongoose.connect(MONGO_CONNECTION_STRING, { useNewUrlParser: true });
 const db = mongoose.connection;
