@@ -10,7 +10,8 @@ const Home = () => {
     const fetchedData = async () => {
       try {
         const response = await axios.get("http://localhost:3500/api/tweet/");
-        setTweets(response.data);
+        const sortedTweets = response.data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+        setTweets(sortedTweets);
       } catch (error) {
         console.error("Error fetching tweets:", error);
       }
