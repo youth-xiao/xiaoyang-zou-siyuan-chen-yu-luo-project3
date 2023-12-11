@@ -76,6 +76,30 @@ router.post("/login", async function (request, response) {
 });
 
 /**
+ * Update user description if logged in
+ */
+router.put("/description", async function (request, response) {
+    const username = request.cookies.username;
+    const newDescription = request.body.description;
+
+    if (!username) {
+        response.status(401);
+        return response.send("User is not logged in");
+    }
+    try {
+        const updatedUser = await UserAccessor.updateUserDescription(username, newDescription);
+        if (!updatedUser) {
+            response.status(404);
+            return response.send("User not found");
+        }
+        return response.json(updatedUser);
+    } catch (error) {
+        response.status(500);
+        return response.send("Error updating description");
+    }
+});
+
+/**
  * Logout user, reset cookies.username
  */
 router.post("/logout", async function (request, response) {
