@@ -6,6 +6,8 @@ const cors = require("cors");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 
+require("dotenv").config();
+
 const app = express();
 
 app.use(cors());
@@ -16,15 +18,7 @@ app.use(cookieParser());
 app.use("/api/tweet", tweetApi);
 app.use("/api/user", userApi);
 
-// app.get('/', function(request, response) {
-//     response.send("This is the second app GET request");
-// })
-
-// app.post('/', function(requst, response) {
-//     response.send("This is a POST request")
-// })
-
-const MONGO_CONNECTION_STRING = "";
+const MONGO_CONNECTION_STRING = process.env.MONGO_CONNECTION;
 
 mongoose.connect(MONGO_CONNECTION_STRING, { useNewUrlParser: true });
 const db = mongoose.connection;
