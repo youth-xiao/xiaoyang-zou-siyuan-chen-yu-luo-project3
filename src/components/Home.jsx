@@ -6,6 +6,7 @@ import Tweet from "./Tweet";
 const Home = () => {
   const [tweets, setTweets] = useState([]);
   const [loggedInUser, setLoggedInUser] = useState(null);
+  const [editingTweet, setEditingTweet] = useState(null);
 
   useEffect(() => {
     const fetchedData = async () => {
@@ -21,13 +22,15 @@ const Home = () => {
     };
     fetchedData();
     const cookieString = document.cookie;
-  const usernameCookie = cookieString && cookieString.split('; ').find(row => row.startsWith('username='));
-  const username = usernameCookie ? usernameCookie.split('=')[1] : null;
-  setLoggedInUser(username ? { username } : null);
+    const usernameCookie =
+      cookieString &&
+      cookieString.split("; ").find((row) => row.startsWith("username="));
+    const username = usernameCookie ? usernameCookie.split("=")[1] : null;
+    setLoggedInUser(username ? { username } : null);
   }, []);
 
   const handleEdit = (editedTweet) => {
-    console.log("Editing tweet:", editedTweet);
+    setEditingTweet(editedTweet);
   };
 
   return (
@@ -38,6 +41,7 @@ const Home = () => {
           <Tweet
             key={tweet._id}
             tweet={tweet}
+            loggedInUser={loggedInUser}
             onEdit={
               loggedInUser && tweet.username === loggedInUser.username
                 ? handleEdit
