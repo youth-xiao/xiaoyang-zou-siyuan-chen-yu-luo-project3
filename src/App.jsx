@@ -21,6 +21,7 @@ const App = () => {
       body: JSON.stringify({ username, password }),
     });
     const data = await response.json();
+    console.log("Login Server Response:", data);
     if (data.success) {
       setIsLoggedIn(true);
       setCurrentUser({
@@ -45,6 +46,7 @@ const App = () => {
       body: JSON.stringify({ username, password }),
     });
     const data = await response.json();
+    console.log("Signup Server Response:", data);
     if (data.success) {
       setIsLoggedIn(true);
       setCurrentUser({
@@ -67,6 +69,7 @@ const App = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("userToken");
+    console.log("Token retrieved from localStorage:", token);
     if (token) {
       // Perform token validation and set user state
       setIsLoggedIn(true);
@@ -83,7 +86,10 @@ const App = () => {
         username={currentUser.username}
       />
       <Routes>
-        <Route path="/home" element={<Home />} />
+        <Route
+          path="/home"
+          element={<Home userToken={localStorage.getItem("userToken")} />}
+        />
         <Route path="/login" element={<Login handleLogin={handleLogin} />} />
         <Route
           path="/register"

@@ -33,30 +33,6 @@ const Home = () => {
     setEditingTweet(editedTweet);
   };
 
-  const handleSaveEdit = async (tweetId, updatedContent) => {
-    console.log("tweetId: ", tweetId);
-    console.log("check link: ", `http://localhost:3500/api/tweet/id/${tweetId}`);
-    try {
-      const token = localStorage.getItem("userToken");
-      console.log("check token: ", token);
-      const response = await axios.put(
-        `http://localhost:3500/api/tweet/id/${tweetId}`,
-        { content: updatedContent },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      const updatedTweet = response.data;
-      console.log("updatedTweet: ", updatedTweet);
-      setTweets((prevTweets) =>
-        prevTweets.map((tweet) =>
-          tweet._id === updatedTweet._id ? updatedTweet : tweet,
-        ),
-      );
-      setEditingTweet(null);
-    } catch (error) {
-      console.error("Error updating tweet:", error);
-    }
-  };
-
   return (
     <div className="home-container">
       <h1>Twitter Home Page</h1>
@@ -65,30 +41,15 @@ const Home = () => {
           <Tweet
             key={tweet._id}
             tweet={tweet}
+            loggedInUser={loggedInUser}
             onEdit={
               loggedInUser && tweet.username === loggedInUser.username
                 ? handleEdit
                 : null
             }
-            handleSaveEdit={handleSaveEdit}
           />
         ))}
       </div>
-
-      {editingTweet && (
-        <div className="edit-modal">
-          <textarea
-            value={editingTweet.content}
-            onChange={(e) =>
-              setEditingTweet({ ...editingTweet, content: e.target.value })
-            }
-          />
-          <button onClick={() => handleSaveEdit(editingTweet._id, editingTweet.content)}>
-            Save
-          </button>
-          <button onClick={() => setEditingTweet(null)}>Cancel</button>
-        </div>
-      )}
     </div>
   );
 };
