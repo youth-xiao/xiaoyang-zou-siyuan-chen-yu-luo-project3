@@ -15,12 +15,19 @@ const Tweet = ({ tweet, loggedInUser, onEdit }) => {
     try {
       const token = localStorage.getItem("userToken");
       console.log("check token: ", token);
-      console.log("check link: ", `http://localhost:3500/api/tweet/id/${tweet._id}`);
-      
+      console.log(
+        "check link: ",
+        `http://localhost:3500/api/tweet/id/${tweet._id}`,
+      );
+
       axios
-        .put(`http://localhost:3500/api/tweet/id/${tweet._id}`, {
-          content: editedContent,
-        })
+        .put(
+          `http://localhost:3500/api/tweet/id/${tweet._id}`,
+          {
+            content: editedContent,
+          },
+          { headers: { Authorization: `Bearer ${token}` } },
+        )
         .then(() => {
           // Notify the parent component about the edit
           onEdit({ ...tweet, content: editedContent });

@@ -20,13 +20,17 @@ const Home = () => {
         console.error("Error fetching tweets:", error);
       }
     };
+
+    const fetchUser = () => {
+      const cookieString = document.cookie;
+      const usernameCookie =
+        cookieString &&
+        cookieString.split("; ").find((row) => row.startsWith("username="));
+      const username = usernameCookie ? usernameCookie.split("=")[1] : null;
+      setLoggedInUser(username ? { username } : null);
+    };
     fetchedData();
-    const cookieString = document.cookie;
-    const usernameCookie =
-      cookieString &&
-      cookieString.split("; ").find((row) => row.startsWith("username="));
-    const username = usernameCookie ? usernameCookie.split("=")[1] : null;
-    setLoggedInUser(username ? { username } : null);
+    fetchUser();
   }, []);
 
   const handleEdit = (editedTweet) => {
@@ -42,11 +46,7 @@ const Home = () => {
             key={tweet._id}
             tweet={tweet}
             loggedInUser={loggedInUser}
-            onEdit={
-              loggedInUser && tweet.username === loggedInUser.username
-                ? handleEdit
-                : null
-            }
+            onEdit={handleEdit}
           />
         ))}
       </div>
