@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: center;
   padding-left: 50px;
+  padding-top: 80px;
 }
 
 .tweets-container {
@@ -11,4 +12,5 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 40px;
 }
