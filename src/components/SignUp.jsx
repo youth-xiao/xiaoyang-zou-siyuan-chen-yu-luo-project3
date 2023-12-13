@@ -15,12 +15,11 @@ const SignUp = ({ handleSignUp }) => {
       setError("Please fill in all fields");
       return;
     }
-    setError("");
-    const wasSuccessful = await handleSignUp(username, password);
-    if (wasSuccessful) {
-      navigate("/");
+    const result = await handleSignUp(username, password);
+    if (result.success) {
+      navigate("/login");
     } else {
-      setError("Failed to sign up. Please try again.");
+      setError(result.message);
     }
   };
 

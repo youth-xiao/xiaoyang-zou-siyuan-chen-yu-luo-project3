@@ -1,51 +1,28 @@
-import { useState } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import Home from "./Home";
+import { Link, useNavigate } from "react-router-dom";
 import "../styling/Navbar.css";
 
 const Navbar = ({ isLoggedIn, handleLogout, username }) => {
-  const [dropdownVisible, setDropdownVisible] = useState(false);
+  const navigate = useNavigate();
 
-  const toggleDropdown = () => setDropdownVisible(!dropdownVisible);
+  const performLogout = () => {
+    handleLogout();
+    navigate("/login");
+  };
 
   return (
     <nav className="navbar">
-      <Link to="/home" className="navbar-link">
-        Home
-      </Link>
+      <Link to="/home" className="navbar-link">Home</Link>
 
       {isLoggedIn ? (
-        <div className="user-info">
-          <span className="navbar-username">{username}</span>
-          <button
-            onClick={toggleDropdown}
-            className="navbar-dropdown-button"
-          ></button>
-          {dropdownVisible && (
-            <div className="dropdown-menu">
-              <Link to="/settings" className="dropdown-item">
-                Settings
-              </Link>
-              <button onClick={handleLogout} className="dropdown-item">
-                Logout
-              </button>
-            </div>
-          )}
-          <img
-            src="/path-to-user-avatar.png"
-            alt="User"
-            className="user-avatar"
-          />
+        <div className="auth-links">
+          <span className="navbar-link navbar-username">{username}</span>
+          <button onClick={performLogout} className="navbar-link">Logout</button>
         </div>
       ) : (
         <div className="auth-links">
-          <Link to="/login" className="navbar-link">
-            Log In
-          </Link>
-          <Link to="/register" className="navbar-link">
-            Sign Up
-          </Link>
+          <Link to="/login" className="navbar-link">Log In</Link>
+          <Link to="/register" className="navbar-link">Sign Up</Link>
         </div>
       )}
     </nav>
