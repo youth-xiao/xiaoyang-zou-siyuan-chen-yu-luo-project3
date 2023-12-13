@@ -12,7 +12,7 @@ const Home = () => {
     useEffect(() => {
         const fetchedData = async () => {
             try {
-                const response = await axios.get("http://localhost:3500/api/tweet/");
+                const response = await axios.get("api/tweet/");
                 const sortedTweets = response.data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
                 setTweets(sortedTweets);
             } catch (error) {
@@ -25,17 +25,10 @@ const Home = () => {
             const usernameCookie = cookieString && cookieString.split("; ").find((row) => row.startsWith("username="));
             const username = usernameCookie ? usernameCookie.split("=")[1] : null;
             setLoggedInUser(username ? { username } : null);
-
-            const tokenCookie = cookieString.split("; ").find((row) => row.startsWith("userToken="));
-
-            const token = tokenCookie ? tokenCookie.split("=")[1] : null;
-
-            console.log("check fetched token: ", token);
-            setToken(token);
         };
         fetchedData();
         fetchUser();
-    }, []);
+    }, [editingTweet]);
 
     const handleEdit = (editedTweet) => {
         setEditingTweet(editedTweet);
@@ -46,7 +39,7 @@ const Home = () => {
             <h1>Twitter Home Page</h1>
             <div className="tweets-container">
                 {tweets.map((tweet) => (
-                    <Tweet key={tweet._id} tweet={tweet} loggedInUser={loggedInUser} onEdit={handleEdit} token={token} />
+                    <Tweet key={tweet._id} tweet={tweet} loggedInUser={loggedInUser} onEdit={handleEdit} />
                 ))}
             </div>
         </div>

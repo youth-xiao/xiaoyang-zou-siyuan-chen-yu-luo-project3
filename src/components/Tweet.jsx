@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import axios from "axios";
 
-const Tweet = ({ tweet, loggedInUser, onEdit, token }) => {
+const Tweet = ({ tweet, loggedInUser, onEdit }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [editedContent, setEditedContent] = useState(tweet.content);
     const isEditable = loggedInUser && tweet.username === loggedInUser.username;
@@ -12,19 +12,11 @@ const Tweet = ({ tweet, loggedInUser, onEdit, token }) => {
     };
 
     const handleSaveClick = async () => {
+        console.log(document.cookie);
         try {
-            console.log("check token: ", token);
-            console.log("check link: ", `http://localhost:3500/api/tweet/id/${tweet._id}`);
-
-            const response = await axios.put(
-                `http://localhost:3500/api/tweet/id/${tweet._id}`,
-                {
-                    content: editedContent,
-                },
-                {
-                    headers: { Authorization: `Bearer ${token}` },
-                }
-            );
+            const response = await axios.put(`api/tweet/id/${tweet._id}`, {
+                content: editedContent,
+            });
 
             // Check if the response status is within the success range (e.g., 200-299)
             if (response.status >= 200 && response.status < 300) {
@@ -83,7 +75,6 @@ Tweet.propTypes = {
         username: PropTypes.string.isRequired,
     }),
     onEdit: PropTypes.func,
-    token: PropTypes.string.isRequired,
 };
 
 export default Tweet;
