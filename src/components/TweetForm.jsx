@@ -1,0 +1,51 @@
+import React, { useState } from "react";
+import axios from "axios";
+
+const TweetForm = () => {
+    const [content, setContent] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
+
+    const handleInputChange = (event) => {
+        setContent(event.target.value);
+    };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        try {
+            const response = await axios.post("/api/tweet", { content });
+            console.log("Tweet created:", response.data);
+            setContent(""); // Clear the input field after successful submission
+            setErrorMessage("");
+        } catch (error) {
+            if (error.response) {
+                setErrorMessage(error.response.data);
+            } else {
+                setErrorMessage("Something went wrong. Please try again.");
+            }
+        }
+    };
+
+    return (
+        <div>
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <label htmlFor="content">Tweet:</label>
+                    <input
+                        type="text"
+                        id="content"
+                        value={content}
+                        onChange={handleInputChange}
+                        required
+                        placeholder="What's happening?"
+                        style={{ width: "200px", height: "300px" }} // Adjust the width as needed
+                    />
+                </div>
+                <button type="submit">Create Tweet</button>
+            </form>
+            {errorMessage && <p>{errorMessage}</p>}
+        </div>
+    );
+};
+
+export default TweetForm;
