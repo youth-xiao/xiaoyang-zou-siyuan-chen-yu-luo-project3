@@ -1,44 +1,99 @@
 /* Tweet.css */
 
-.tweet {
-  background-color: #f0f0f0; /* Light grey background color */
-  border-radius: 8px; /* Rounded corners */
-  padding: 16px; /* Padding around the content */
-  margin-bottom: 16px; /* Margin at the bottom for spacing */
-}
-
 .tweet-wrapper {
-  width: 100%; /* Make each wrapper take full width */
-  display: flex; /* Use flexbox for horizontal alignment */
-  align-items: center; /* Center items vertically */
-  margin-bottom: 16px; /* Add margin at the bottom for spacing */
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
 }
 
-.tweet p {
-  margin: 0; /* Remove default margin for paragraphs */
+.tweet {
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 15px;
+    background-color: #f9f9f9;
 }
 
 .tweet-link {
-  text-decoration: none; /* Remove underline from the link */
-  color: #333; /* Dark text color for the link */
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.tweet p {
+    margin: 0;
+}
+
+.tweet-username {
+    font-size: large;
+}
+
+.tweet-username:hover {
+    color: #27a9ef;
+}
+
+.tweet-time {
+    font-style: italic;
+    font-size: small;
+    padding-top: 8px;
+    color: gray;
+}
+
+textarea {
+    width: calc(100% - 30px);
+    margin-bottom: 10px;
+    resize: vertical;
 }
 
 .save-button,
 .cancel-button,
 .edit-button,
 .delete-button {
-  background-color: #4caf50; /* Green background color */
-  color: white; /* White text color */
-  padding: 8px 12px; /* Padding around the button text */
-  border: none; /* Remove border */
-  border-radius: 4px; /* Rounded corners */
-  cursor: pointer; /* Pointer cursor on hover */
-  margin-right: 8px; /* Margin between buttons */
+    padding: 7px 12px;
+    margin-right: 8px;
+    margin-top: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    color: rgb(15, 15, 15);
+    font-size: small;
+    transition: 0.4s ease;
 }
 
-.save-button:hover,
-.cancel-button:hover,
-.edit-button:hover,
+.save-button {
+    background-color: #dcf2d3;
+}
+
+.save-button:hover {
+    background-color: #2b8109;
+    color: white;
+}
+
+.cancel-button {
+    background-color: #f1c7c4;
+}
+
+.cancel-button:hover {
+    background-color: #be1d12;
+    color: white;
+}
+
+.edit-button {
+    background-color: #bfe3f2;
+}
+
+.edit-button:hover {
+    background-color: #0577a8;
+    color: white;
+}
+
+.delete-button {
+    background-color: #f1c7c4;
+}
+
 .delete-button:hover {
-  background-color: #45a049; /* Darker green on hover */
+    background-color: #be1d12;
+    color: white;
 }

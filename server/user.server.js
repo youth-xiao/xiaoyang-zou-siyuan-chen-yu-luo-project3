@@ -6,14 +6,6 @@ const bycrpt = require("bcryptjs");
 const UserAccessor = require("./db/user.model");
 
 /**
- * Get all registered users
- */
-router.get("/", async function (request, response) {
-    const foundUser = await UserAccessor.getAllUser();
-    return response.json(foundUser);
-});
-
-/**
  * Get user by username
  */
 router.get("/:username", async function (request, response) {
