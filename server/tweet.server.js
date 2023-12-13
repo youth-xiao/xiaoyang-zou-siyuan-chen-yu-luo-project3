@@ -31,7 +31,7 @@ router.post("/", async function (request, response) {
 /**
  * Get all available tweets on home page
  */
-router.get("/", async function (req, response) {
+router.get("/", async function (request, response) {
     try {
         const foundTweets = await TweetAccessor.getAllTweet();
         return response.json(foundTweets);
@@ -46,8 +46,8 @@ router.get("/", async function (req, response) {
  *
  * e.g., /api/tweet/xiaoyang ==> return all tweets owned by xiaoyang
  */
-router.get("/:username", async function (req, response) {
-    const requestedUsername = req.params.username;
+router.get("/:username", async function (request, response) {
+    const requestedUsername = request.params.username;
     if (!requestedUsername) {
         response.status(400);
         return response.send("Username parameter is missing.");

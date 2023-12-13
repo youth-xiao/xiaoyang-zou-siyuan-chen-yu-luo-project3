@@ -82,7 +82,7 @@ const App = () => {
                 <Route path="/home" element={<Home />} />
                 <Route path="/login" element={<Login handleLogin={handleLogin} />} />
                 <Route path="/register" element={<SignUp handleSignUp={handleSignUp} />} />
-                <Route path="/userPage" element={<UserPage />} />
+                <Route path="/userPage/:username" element={<UserPage />} />
             </Routes>
         </Router>
     );

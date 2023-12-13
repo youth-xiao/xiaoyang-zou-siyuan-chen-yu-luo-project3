@@ -14,6 +14,24 @@ router.get("/", async function (request, response) {
 });
 
 /**
+ * Get user by username
+ */
+router.get("/:username", async function (request, response) {
+    const requestedUsername = request.params.username;
+    if (!requestedUsername) {
+        response.status(400);
+        return response.send("Username parameter is missing.");
+    }
+    try {
+        const foundUser = await UserAccessor.getUserByUsername(requestedUsername);
+        return response.json(foundUser);
+    } catch (error) {
+        response.status(500);
+        return response.send("Error fetching user's tweets.");
+    }
+});
+
+/**
  * Create a new user (with unique username and encrypted password)
  */
 router.post("/", async function (request, response) {
