@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-const Tweet = ({ tweet, loggedInUser, onEdit }) => {
+const Tweet = ({ tweet, loggedInUser, onEdit, setIsTweetChange }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [editedContent, setEditedContent] = useState(tweet.content);
     const isEditable = loggedInUser && tweet.username === loggedInUser;
@@ -21,6 +21,7 @@ const Tweet = ({ tweet, loggedInUser, onEdit }) => {
             if (response.status >= 200 && response.status < 300) {
                 onEdit({ ...tweet, content: editedContent });
                 setIsEditing(false);
+                setIsTweetChange((prevCount) => prevCount + 1);
             } else {
                 console.error("Error updating tweet. Server returned:", response.status);
             }
@@ -32,6 +33,15 @@ const Tweet = ({ tweet, loggedInUser, onEdit }) => {
     const handleCancelClick = () => {
         setIsEditing(false);
         setEditedContent(tweet.content);
+    };
+
+    const handleDeleteClick = async () => {
+        try {
+            await axios.delete(`/api/tweet/id/${tweet._id}`);
+            setIsTweetChange((prevCount) => prevCount + 1);
+        } catch (error) {
+            console.error("Error deleting tweet:", error.message);
+        }
     };
 
     return (
@@ -54,9 +64,14 @@ const Tweet = ({ tweet, loggedInUser, onEdit }) => {
                                 </button>
                             </>
                         ) : (
-                            <button onClick={handleEditClick} className="edit-button">
-                                Edit
-                            </button>
+                            <>
+                                <button onClick={handleEditClick} className="edit-button">
+                                    Edit
+                                </button>
+                                <button onClick={handleDeleteClick} className="delete-button">
+                                    Delete
+                                </button>
+                            </>
                         )}
                     </div>
                 )}
