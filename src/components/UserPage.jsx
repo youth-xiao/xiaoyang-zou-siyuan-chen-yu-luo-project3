@@ -11,13 +11,14 @@ function UserPage() {
     const [loggedInUser, setLoggedInUser] = useState(null);
     const [isEditing, setIsEditing] = useState(false);
     const [editedContent, setEditedContent] = useState("");
-    const [tweetCount, setTweetCount] = useState(0);
+    const [isTweetChange, setIsTweetChange] = useState(0);
     const [editingTweet, setEditingTweet] = useState(null);
     const { username } = useParams();
 
     useEffect(() => {
         async function fetchTweetsAndUser() {
             try {
+                console.log(username);
                 const tweetsInfo = await axios.get(`/api/tweet/` + username);
                 const userInfo = await axios.get(`/api/user/` + username);
                 setTweets(tweetsInfo.data);
@@ -30,7 +31,7 @@ function UserPage() {
         fetchTweetsAndUser();
         const loggedIn = Cookies.get("username");
         setLoggedInUser(loggedIn);
-    }, [tweetCount]);
+    }, [isTweetChange]);
 
     const handleEditDescription = async () => {
         try {
@@ -79,9 +80,9 @@ function UserPage() {
                 </div>
             )}
 
-            {loggedInUser === username && <TweetForm setTweetCount={setTweetCount} />}
+            {loggedInUser === username && <TweetForm setIsTweetChange={setIsTweetChange} />}
 
-            <div className="tweets-container">{Array.isArray(tweets) && tweets.length > 0 ? tweets.map((tweet) => <Tweet key={tweet._id} tweet={tweet} loggedInUser={loggedInUser} onEdit={handleEdit} />) : <p>No tweets available</p>}</div>
+            <div className="tweets-container">{Array.isArray(tweets) && tweets.length > 0 ? tweets.map((tweet) => <Tweet key={tweet._id} tweet={tweet} loggedInUser={loggedInUser} onEdit={handleEdit} setIsTweetChange={setIsTweetChange} />) : <p>No tweets available</p>}</div>
         </div>
     );
 }

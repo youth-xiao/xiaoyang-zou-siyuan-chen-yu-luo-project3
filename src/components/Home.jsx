@@ -8,6 +8,7 @@ const Home = () => {
     const [tweets, setTweets] = useState([]);
     const [loggedInUser, setLoggedInUser] = useState("");
     const [editingTweet, setEditingTweet] = useState(null);
+    const [isTweetChange, setIsTweetChange] = useState(0);
 
     useEffect(() => {
         const fetchedData = async () => {
@@ -26,7 +27,7 @@ const Home = () => {
         };
         fetchedData();
         fetchUser();
-    }, [editingTweet]);
+    }, [isTweetChange]);
 
     const handleEdit = (editedTweet) => {
         setEditingTweet(editedTweet);
@@ -37,7 +38,7 @@ const Home = () => {
             <h1>Twitter Home Page</h1>
             <div className="tweets-container">
                 {tweets.map((tweet) => (
-                    <Tweet key={tweet._id} tweet={tweet} loggedInUser={loggedInUser} onEdit={handleEdit} />
+                    <Tweet key={tweet._id} tweet={tweet} loggedInUser={loggedInUser} onEdit={handleEdit} setIsTweetChange={setIsTweetChange} />
                 ))}
             </div>
         </div>
