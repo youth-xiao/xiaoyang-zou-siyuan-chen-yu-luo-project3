@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const TweetForm = () => {
+const TweetForm = ({ setTweetCount }) => {
     const [content, setContent] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
 
@@ -13,8 +13,8 @@ const TweetForm = () => {
         event.preventDefault();
 
         try {
-            const response = await axios.post("/api/tweet", { content });
-            console.log("Tweet created:", response.data);
+            await axios.post("/api/tweet", { content });
+            setTweetCount((prevCount) => prevCount + 1);
             setContent(""); // Clear the input field after successful submission
             setErrorMessage("");
         } catch (error) {

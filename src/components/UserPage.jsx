@@ -8,8 +8,11 @@ import Cookies from "js-cookie";
 function UserPage() {
     const [user, setUser] = useState(null);
     const [tweets, setTweets] = useState([]);
-    // const [description, setDescription] = useState("");
-    const [loggedInUser, setLoggedInUser] = useState("");
+    const [loggedInUser, setLoggedInUser] = useState(null);
+    const [isEditing, setIsEditing] = useState(false);
+    const [editedContent, setEditedContent] = useState("");
+    const [tweetCount, setTweetCount] = useState(0);
+    const [editingTweet, setEditingTweet] = useState(null);
     const { username } = useParams();
 
     useEffect(() => {
@@ -19,6 +22,7 @@ function UserPage() {
                 const userInfo = await axios.get(`/api/user/` + username);
                 setTweets(tweetsInfo.data);
                 setUser(userInfo.data);
+                setEditedContent(userInfo.data.description);
             } catch (error) {
                 console.error("Error fetching tweets and user: ", error);
             }
@@ -26,19 +30,58 @@ function UserPage() {
         fetchTweetsAndUser();
         const loggedIn = Cookies.get("username");
         setLoggedInUser(loggedIn);
-    }, [username, tweets]);
+    }, [tweetCount]);
 
+    const handleEditDescription = async () => {
+        try {
+            await axios.put("/api/user/description", {
+                description: editedContent,
+            });
+            setUser({ ...user, description: editedContent });
+            setIsEditing(false);
+        } catch (error) {
+            console.error("Error updating description: ", error);
+        }
+    };
+
+    const handleCancelClick = () => {
+        setIsEditing(false);
+        setEditedContent(user.description);
+    };
+
+    function renderDescription() {
+        return (
+            <div>
+                {isEditing ? (
+                    <div>
+                        <textarea value={editedContent} onChange={(e) => setEditedContent(e.target.value)} rows={3} cols={50} />
+                        <button onClick={handleEditDescription}>Save</button>
+                        <button onClick={handleCancelClick}>Cancel</button>
+                    </div>
+                ) : (
+                    <div>
+                        <p>{user.description}</p>
+                        {loggedInUser === username && <button onClick={() => setIsEditing(true)}>Edit</button>}
+                    </div>
+                )}
+            </div>
+        );
+    }
+    const handleEdit = (editedTweet) => {
+        setEditingTweet(editedTweet);
+    };
     return (
         <div>
             {user && (
                 <div>
                     <h1>{user.username}</h1>
-                    <p>{user.description}</p>
-                    {loggedInUser === username && <button>Edit Description</button>}
+                    {renderDescription()}
                 </div>
             )}
-            {loggedInUser === username && <TweetForm />}
-            <div className="tweets-container">{Array.isArray(tweets) && tweets.length > 0 ? tweets.map((tweet) => <Tweet key={tweet._id} tweet={tweet} onEdit={loggedInUser && tweet.username === loggedInUser.username ? handleEdit : null} />) : <p>No tweets available</p>}</div>
+
+            {loggedInUser === username && <TweetForm setTweetCount={setTweetCount} />}
+
+            <div className="tweets-container">{Array.isArray(tweets) && tweets.length > 0 ? tweets.map((tweet) => <Tweet key={tweet._id} tweet={tweet} loggedInUser={loggedInUser} onEdit={handleEdit} />) : <p>No tweets available</p>}</div>
         </div>
     );
 }
