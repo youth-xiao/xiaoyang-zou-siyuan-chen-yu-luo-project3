@@ -1,0 +1,44 @@
+/* Tweet.css */
+
+.tweet {
+  background-color: #f0f0f0; /* Light grey background color */
+  border-radius: 8px; /* Rounded corners */
+  padding: 16px; /* Padding around the content */
+  margin-bottom: 16px; /* Margin at the bottom for spacing */
+}
+
+.tweet-wrapper {
+  width: 100%; /* Make each wrapper take full width */
+  display: flex; /* Use flexbox for horizontal alignment */
+  align-items: center; /* Center items vertically */
+  margin-bottom: 16px; /* Add margin at the bottom for spacing */
+}
+
+.tweet p {
+  margin: 0; /* Remove default margin for paragraphs */
+}
+
+.tweet-link {
+  text-decoration: none; /* Remove underline from the link */
+  color: #333; /* Dark text color for the link */
+}
+
+.save-button,
+.cancel-button,
+.edit-button,
+.delete-button {
+  background-color: #4caf50; /* Green background color */
+  color: white; /* White text color */
+  padding: 8px 12px; /* Padding around the button text */
+  border: none; /* Remove border */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  margin-right: 8px; /* Margin between buttons */
+}
+
+.save-button:hover,
+.cancel-button:hover,
+.edit-button:hover,
+.delete-button:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
