@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import axios from "axios";
 
-const Tweet = ({ tweet, loggedInUser, onEdit }) => {
+const Tweet = ({ tweet, loggedInUser, onEdit, token }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedContent, setEditedContent] = useState(tweet.content);
   const isEditable = loggedInUser && tweet.username === loggedInUser.username;
@@ -11,35 +11,39 @@ const Tweet = ({ tweet, loggedInUser, onEdit }) => {
     setIsEditing(true);
   };
 
-  const handleSaveClick = () => {
-    try {
-      const token = localStorage.getItem("userToken");
-      console.log("check token: ", token);
-      console.log(
-        "check link: ",
-        `http://localhost:3500/api/tweet/id/${tweet._id}`,
-      );
+  const handleSaveClick = async () => {
+  try {
+    console.log("check token: ", token);
+    console.log(
+      "check link: ",
+      `http://localhost:3500/api/tweet/id/${tweet._id}`,
+    );
 
-      axios
-        .put(
-          `http://localhost:3500/api/tweet/id/${tweet._id}`,
-          {
-            content: editedContent,
-          },
-          { headers: { Authorization: `Bearer ${token}` } },
-        )
-        .then(() => {
-          // Notify the parent component about the edit
-          onEdit({ ...tweet, content: editedContent });
-          setIsEditing(false);
-        })
-        .catch((error) => {
-          console.error("Error updating tweet:", error);
-        });
-    } catch (error) {
-      console.error("Error updating tweet:", error);
+    const response = await axios.put(
+      `http://localhost:3500/api/tweet/id/${tweet._id}`,
+      {
+        content: editedContent,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+
+    // Check if the response status is within the success range (e.g., 200-299)
+    if (response.status >= 200 && response.status < 300) {
+      // Notify the parent component about the edit
+      onEdit({ ...tweet, content: editedContent });
+      setIsEditing(false);
+    } else {
+      // Handle non-successful response
+      console.error("Error updating tweet. Server returned:", response.status);
     }
-  };
+  } catch (error) {
+    console.error("Error updating tweet:", error.message);
+  }
+};
+
+  
   const handleCancelClick = () => {
     setIsEditing(false);
     setEditedContent(tweet.content);
@@ -92,6 +96,7 @@ Tweet.propTypes = {
     username: PropTypes.string.isRequired,
   }),
   onEdit: PropTypes.func,
+  token: PropTypes.string.isRequired, 
 };
 
 export default Tweet;

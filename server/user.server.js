@@ -5,6 +5,9 @@ const bycrpt = require("bcryptjs");
 
 const UserAccessor = require("./db/user.model");
 
+const jwt = require("jsonwebtoken");
+const crypto = require('crypto');
+
 /**
  * Get all registered users
  */
@@ -68,9 +71,11 @@ router.post("/login", async function (request, response) {
   }
 
   if (bycrpt.compareSync(password, receivedUser.password)) {
+    const secretKey = crypto.randomBytes(32).toString('hex');
+    const token = jwt.sign({ username }, secretKey, { expiresIn: '1d' });
     response.cookie("username", receivedUser.username);
     response.status(200);
-    return response.send({ loggedIn: true });
+    return response.send({ token, loggedIn: true });
   } else {
     response.status(404);
     return response.send(
