@@ -60,7 +60,6 @@ const App = () => {
 
     useEffect(() => {
         const username = Cookies.get("username");
-        console.log(Cookies);
         if (username) {
             setIsLoggedIn(true);
             setCurrentUser({ username });
