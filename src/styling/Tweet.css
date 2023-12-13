@@ -72,11 +72,11 @@ textarea {
 }
 
 .cancel-button {
-    background-color: #f1c7c4;
+    background-color: #cbc6c6;
 }
 
 .cancel-button:hover {
-    background-color: #be1d12;
+    background-color: #565555;
     color: white;
 }
 
