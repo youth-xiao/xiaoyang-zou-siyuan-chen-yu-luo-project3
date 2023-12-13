@@ -2,6 +2,8 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import { Link } from "react-router-dom"; // Import Link from react-router-dom
 import axios from "axios";
+import "../styling/Tweet.css";
+
 
 const Tweet = ({ tweet, loggedInUser, onEdit }) => {
   const [isEditing, setIsEditing] = useState(false);
