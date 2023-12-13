@@ -14,8 +14,8 @@ function UserPage(props) {
     useEffect(() => {
         async function fetchTweetsAndUser() {
             try {
-                const tweetsInfo = await axios.get(`http://localhost:3500/api/tweet/` + username);
-                const userInfo = await axios.get(`http://localhost:3500/api/user/` + username);
+                const tweetsInfo = await axios.get(`/api/tweet/` + username);
+                const userInfo = await axios.get(`/api/user/` + username);
                 setTweets(tweetsInfo.data);
                 setUser(userInfo.data);
             } catch (error) {
@@ -24,7 +24,6 @@ function UserPage(props) {
         }
         fetchTweetsAndUser();
         const cookieString = document.cookie;
-        console.log(cookieString);
         const usernameCookie = cookieString && cookieString.split("; ").find((row) => row.startsWith("username="));
         const loggedIn = usernameCookie ? usernameCookie.split("=")[1] : null;
         setLoggedInUser(loggedIn ? { loggedIn } : null);
