@@ -1,11 +1,12 @@
 import "../styling/Home.css";
 import { useState, useEffect } from "react";
+import Cookies from "js-cookie";
 import axios from "axios";
 import Tweet from "./Tweet";
 
 const Home = () => {
     const [tweets, setTweets] = useState([]);
-    const [loggedInUser, setLoggedInUser] = useState(null);
+    const [loggedInUser, setLoggedInUser] = useState("");
     const [editingTweet, setEditingTweet] = useState(null);
 
     useEffect(() => {
@@ -20,10 +21,8 @@ const Home = () => {
         };
 
         const fetchUser = () => {
-            const cookieString = document.cookie;
-            const usernameCookie = cookieString && cookieString.split("; ").find((row) => row.startsWith("username="));
-            const username = usernameCookie ? usernameCookie.split("=")[1] : null;
-            setLoggedInUser(username ? { username } : null);
+            const loggedIn = Cookies.get("username");
+            setLoggedInUser(loggedIn);
         };
         fetchedData();
         fetchUser();
