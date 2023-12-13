@@ -6,6 +6,7 @@ import Tweet from "./Tweet";
 const Home = () => {
   const [tweets, setTweets] = useState([]);
   const [loggedInUser, setLoggedInUser] = useState(null);
+  const [token, setToken] = useState(null);
   const [editingTweet, setEditingTweet] = useState(null);
 
   useEffect(() => {
@@ -28,6 +29,17 @@ const Home = () => {
         cookieString.split("; ").find((row) => row.startsWith("username="));
       const username = usernameCookie ? usernameCookie.split("=")[1] : null;
       setLoggedInUser(username ? { username } : null);
+
+      const tokenCookie = cookieString
+      .split("; ")
+      .find((row) => row.startsWith("userToken="));
+
+      const token = tokenCookie
+      ? tokenCookie.split("=")[1]
+        : null;
+      
+      console.log("check fetched token: ", token);
+      setToken(token);
     };
     fetchedData();
     fetchUser();
@@ -46,7 +58,8 @@ const Home = () => {
             key={tweet._id}
             tweet={tweet}
             loggedInUser={loggedInUser}
-            onEdit={handleEdit}
+            onEdit={ handleEdit }
+            token={token}
           />
         ))}
       </div>

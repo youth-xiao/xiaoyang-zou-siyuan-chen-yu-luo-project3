@@ -25,6 +25,7 @@ async function handleLogin(username, password) {
       throw new Error(errorText);
     }
     const data = await response.json();
+    console.log("check data", data);
     Cookies.set('userToken', data.token, { expires: 1 }); // Set token in cookies
     Cookies.set('username', username, { expires: 1 }); // Set username in cookies
     setIsLoggedIn(true);
