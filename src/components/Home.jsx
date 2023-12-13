@@ -6,7 +6,6 @@ import Tweet from "./Tweet";
 const Home = () => {
     const [tweets, setTweets] = useState([]);
     const [loggedInUser, setLoggedInUser] = useState(null);
-    const [token, setToken] = useState(null);
     const [editingTweet, setEditingTweet] = useState(null);
 
     useEffect(() => {
