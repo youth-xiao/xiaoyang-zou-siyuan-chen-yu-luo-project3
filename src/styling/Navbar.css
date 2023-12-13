@@ -25,9 +25,7 @@
   margin-right: 10px; /* Adds space between the Log In and Sign Up buttons */
 }
 
-.navbar-dropdown-button {
-  margin-left: 10px; /* Adds space between the username and dropdown button */
-}
+
 
 .navbar-username {
   color: white;
@@ -35,38 +33,4 @@
 
 .auth-links {
   display: flex;
-}
-
-.dropdown-menu {
-  position: absolute;
-  right: 10px;
-  top: 40px; /* Adjust the top value based on your navbar's height */
-  background-color: white;
-  border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  display: none;
-}
-
-.dropdown-visible {
-  display: block;
-}
-
-.dropdown-item {
-  padding: 10px;
-  display: block;
-  text-align: left;
-  color: black;
-  text-decoration: none;
-}
-
-.user-avatar {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  border: 2px solid white;
-}
-
-/* Add hover effects for links and buttons */
-.navbar-link:hover, .dropdown-item:hover {
-  background-color: rgba(255, 255, 255, 0.1);
 }
