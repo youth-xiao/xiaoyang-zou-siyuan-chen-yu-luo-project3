@@ -1,11 +1,38 @@
-.input-box {
-    padding-bottom: 30px;
+.form-container {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+}
+.input-box {
     padding-top: 30px;
 }
 
-.input-container {
-    display: flex;
-    flex-direction: column;
+.cotent {
+    font-weight: bold;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.input-container input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #91a1a1;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 400px;
+    height: 150px;
+    box-shadow: 6px 5px rgba(0, 0, 0, 0.1);
+}
+
+.create-button {
+    width: 100px;
+    background-color: white;
+    border: 1px solid gray;
+    align-self: flex-end;
+    box-shadow: 6px 5px rgba(0, 0, 0, 0.1);
+}
+
+.create-button:hover {
+    background-color: #72ceff;
+    color: white;
 }
