@@ -27,11 +27,6 @@ async function updateUserDescription(username, newDescription) {
   }
 }
 
-// User1 - p: 1234 - createdDate: 12/05
-// User2 - p: 2345 - createdDate: 12/05
-// User3 - p: 3456 - createdDate: 12/01
-// UserModel.find({p: 1234, createdDate: '12/05'}).exec()
-
 module.exports = {
   insertUser,
   getUserByUsername,

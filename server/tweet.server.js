@@ -31,14 +31,14 @@ router.post("/", async function (request, response) {
 /**
  * Get all available tweets on home page
  */
-router.get("/", async function (req, response) {
-  try {
-    const foundTweets = await TweetAccessor.getAllTweet();
-    return response.json(foundTweets);
-  } catch (error) {
-    response.status(500);
-    return response.send("Error fetching tweets.");
-  }
+router.get("/", async function (request, response) {
+    try {
+        const foundTweets = await TweetAccessor.getAllTweet();
+        return response.json(foundTweets);
+    } catch (error) {
+        response.status(500);
+        return response.send("Error fetching tweets.");
+    }
 });
 
 /**
@@ -46,20 +46,19 @@ router.get("/", async function (req, response) {
  *
  * e.g., /api/tweet/xiaoyang ==> return all tweets owned by xiaoyang
  */
-router.get("/:username", async function (req, response) {
-  const requestedUsername = req.params.username;
-  if (!requestedUsername) {
-    response.status(400);
-    return response.send("Username parameter is missing.");
-  }
-  try {
-    const foundTweets =
-      await TweetAccessor.findTweetByUsername(requestedUsername);
-    return response.json(foundTweets);
-  } catch (error) {
-    response.status(500);
-    return response.send("Error fetching user's tweets.");
-  }
+router.get("/:username", async function (request, response) {
+    const requestedUsername = request.params.username;
+    if (!requestedUsername) {
+        response.status(400);
+        return response.send("Username parameter is missing.");
+    }
+    try {
+        const foundTweets = await TweetAccessor.findTweetByUsername(requestedUsername);
+        return response.json(foundTweets);
+    } catch (error) {
+        response.status(500);
+        return response.send("Error fetching user's tweets.");
+    }
 });
 
 /**

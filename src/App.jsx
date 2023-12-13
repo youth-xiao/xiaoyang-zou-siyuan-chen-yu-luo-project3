@@ -92,7 +92,7 @@ const handleLogout = () => {
           path="/register"
           element={<SignUp handleSignUp={handleSignUp} />}
         />
-        <Route path="/userPage" element={<UserPage />} />
+        <Route path="/userPage/:username" element={<UserPage />} />
       </Routes>
     </Router>
   );
