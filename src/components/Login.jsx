@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import "../styling/Login.css";
 
-const Login = ({ handleLogin }) => {
+const Login = ({ handleLogin, setIsLoggedIn, setCurrentUser  }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -15,12 +15,14 @@ const Login = ({ handleLogin }) => {
       setError("Please fill in all fields");
       return;
     }
-    setError("");
-    const wasSuccessful = await handleLogin(username, password);
-    if (wasSuccessful) {
-      navigate("/");
+    const result = await handleLogin(username, password);
+    if (result.success) {
+      localStorage.setItem("userToken", result.token); // Save the token
+      setIsLoggedIn(true); // Update login state
+      setCurrentUser({ username: username }); // Update current user
+      navigate("/userpage");
     } else {
-      setError("Failed to log in. Please try again.");
+      setError(result.message);
     }
   };
 
@@ -62,6 +64,8 @@ const Login = ({ handleLogin }) => {
 
 Login.propTypes = {
   handleLogin: PropTypes.func.isRequired,
+  setIsLoggedIn: PropTypes.func.isRequired,
+  setCurrentUser: PropTypes.func.isRequired,
 };
 
 export default Login;
