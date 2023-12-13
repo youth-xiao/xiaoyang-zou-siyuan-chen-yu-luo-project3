@@ -24,6 +24,7 @@ function UserPage(props) {
         }
         fetchTweetsAndUser();
         const cookieString = document.cookie;
+        console.log(cookieString);
         const usernameCookie = cookieString && cookieString.split("; ").find((row) => row.startsWith("username="));
         const loggedIn = usernameCookie ? usernameCookie.split("=")[1] : null;
         setLoggedInUser(loggedIn ? { loggedIn } : null);

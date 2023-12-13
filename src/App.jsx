@@ -59,7 +59,7 @@ const handleLogout = () => {
   setIsLoggedIn(false);
   setCurrentUser({});
   Cookies.remove("userToken");
-  Cookies.remove("username"); 
+  Cookies.remove("username");
 };
 
   useEffect(() => {
@@ -92,7 +92,7 @@ const handleLogout = () => {
           path="/register"
           element={<SignUp handleSignUp={handleSignUp} />}
         />
-        <Route path="/userPage/:username" element={<UserPage />} />
+        <Route path="/user/:username" element={<UserPage />} />
       </Routes>
     </Router>
   );
