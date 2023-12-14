@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router";
 import Tweet from "./Tweet";
@@ -13,7 +13,7 @@ function UserPage() {
   const [isEditing, setIsEditing] = useState(false);
   const [editedContent, setEditedContent] = useState("");
   const [isTweetChange, setIsTweetChange] = useState(0);
-  const [editingTweet, setEditingTweet] = useState(null);
+  const [, setEditingTweet] = useState(null);
   const { username } = useParams();
 
   useEffect(() => {
@@ -38,7 +38,7 @@ function UserPage() {
     fetchTweetsAndUser();
     const loggedIn = Cookies.get("username");
     setLoggedInUser(loggedIn);
-  }, [isTweetChange]);
+  }, [isTweetChange, username]);
 
   const handleEditDescription = async () => {
     try {

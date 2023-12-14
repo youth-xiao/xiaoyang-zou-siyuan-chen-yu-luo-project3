@@ -1,6 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 import "../styling/TweetForm.css";
+import PropTypes from "prop-types";
+
 
 const TweetForm = ({ setIsTweetChange }) => {
   const [content, setContent] = useState("");
@@ -51,6 +53,10 @@ const TweetForm = ({ setIsTweetChange }) => {
       {errorMessage && <p>{errorMessage}</p>}
     </div>
   );
+};
+
+TweetForm.propTypes = {
+  setIsTweetChange: PropTypes.func.isRequired,
 };
 
 export default TweetForm;
