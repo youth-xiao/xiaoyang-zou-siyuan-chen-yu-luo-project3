@@ -1,35 +1,35 @@
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #333;
-    padding: 10px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  padding: 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
 }
 
 .navbar-link,
 .navbar-dropdown-button {
-    color: white;
-    text-decoration: none;
-    padding: 10px 15px;
-    border: 1px solid white;
-    border-radius: 5px;
-    background: transparent;
-    cursor: pointer;
+  color: white;
+  text-decoration: none;
+  padding: 10px 15px;
+  border: 1px solid white;
+  border-radius: 5px;
+  background: transparent;
+  cursor: pointer;
 }
 
 .navbar-link:not(:last-child) {
-    margin-right: 10px; /* Adds space between the Log In and Sign Up buttons */
+  margin-right: 10px; /* Adds space between the Log In and Sign Up buttons */
 }
 
 .navbar-username {
-    color: white;
+  color: white;
 }
 
 .auth-links {
-    display: flex;
+  display: flex;
 }
