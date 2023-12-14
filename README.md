@@ -7,6 +7,8 @@ This Twitter-like application allows users to sign in, log in, log out, create t
 -   React
 -   Express.js
 -   MongoDB
+-   Authorization
+-   Cookies
 
 ## Team Members
 
