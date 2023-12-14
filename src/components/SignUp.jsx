@@ -17,7 +17,7 @@ const SignUp = ({ handleSignUp }) => {
     }
     const result = await handleSignUp(username, password);
     if (result.success) {
-      navigate("/login");
+      navigate("/");
     } else {
       setError(result.message);
     }

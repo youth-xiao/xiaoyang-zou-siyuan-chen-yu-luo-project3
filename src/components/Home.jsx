@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
 import Tweet from "./Tweet";
-import { useParams } from "react-router";
 import TweetForm from "./TweetForm";
 
 const Home = () => {
@@ -16,7 +15,12 @@ const Home = () => {
         const fetchedData = async () => {
             try {
                 const response = await axios.get("api/tweet/");
-                const sortedTweets = response.data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+                const sortedTweets = response.data.sort((a, b) => {
+                    const dateA = new Date(a.createdTime).getTime();
+                    const dateB = new Date(b.createdTime).getTime();
+                    console.log(dateB - dateA);
+                    return dateB - dateA;
+                });
                 setTweets(sortedTweets);
             } catch (error) {
                 console.error("Error fetching tweets:", error);
