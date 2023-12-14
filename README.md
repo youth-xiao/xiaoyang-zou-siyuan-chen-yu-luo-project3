@@ -14,7 +14,7 @@ Xiaoyang Zou, Yu Luo, Siyuan Chen
 
 ## How to Run
 
-1. **Clone Repository:**
+1. **Clone Repository**
 
 2. **Install Dependencies:**
 
