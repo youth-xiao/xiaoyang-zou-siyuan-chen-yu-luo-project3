@@ -10,10 +10,6 @@ function getUserByUsername(username) {
   return UserModel.findOne({ username: username }).exec();
 }
 
-function getAllUser() {
-  return UserModel.find().exec();
-}
-
 async function updateUserDescription(username, newDescription) {
   try {
     const updatedUser = await UserModel.findOneAndUpdate(
@@ -30,6 +26,5 @@ async function updateUserDescription(username, newDescription) {
 module.exports = {
   insertUser,
   getUserByUsername,
-  getAllUser,
   updateUserDescription,
 };
