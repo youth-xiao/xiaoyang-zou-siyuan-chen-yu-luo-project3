@@ -8,7 +8,7 @@ import TweetForm from "./TweetForm";
 const Home = () => {
   const [tweets, setTweets] = useState([]);
   const [loggedInUser, setLoggedInUser] = useState("");
-  const [editingTweet, setEditingTweet] = useState(null);
+  const [, setEditingTweet] = useState(null);
   const [isTweetChange, setIsTweetChange] = useState(0);
 
   useEffect(() => {

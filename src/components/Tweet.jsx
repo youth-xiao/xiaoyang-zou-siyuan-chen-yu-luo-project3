@@ -102,6 +102,7 @@ Tweet.propTypes = {
   }).isRequired,
   loggedInUser: PropTypes.string,
   onEdit: PropTypes.func,
+  setIsTweetChange: PropTypes.func.isRequired,
 };
 
 export default Tweet;

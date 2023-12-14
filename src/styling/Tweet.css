@@ -1,99 +1,99 @@
 /* Tweet.css */
 
 .tweet-wrapper {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
 .tweet {
-    width: 300px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 15px;
-    background-color: #f9f9f9;
+  width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 15px;
+  background-color: #f9f9f9;
 }
 
 .tweet-link {
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-    margin-bottom: 8px;
-    display: block;
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 8px;
+  display: block;
 }
 
 .tweet p {
-    margin: 0;
+  margin: 0;
 }
 
 .tweet-username {
-    font-size: large;
+  font-size: large;
 }
 
 .tweet-username:hover {
-    color: #27a9ef;
+  color: #27a9ef;
 }
 
 .tweet-time {
-    font-style: italic;
-    font-size: small;
-    padding-top: 8px;
-    color: gray;
+  font-style: italic;
+  font-size: small;
+  padding-top: 8px;
+  color: gray;
 }
 
 textarea {
-    width: calc(100% - 30px);
-    margin-bottom: 10px;
-    resize: vertical;
+  width: calc(100% - 30px);
+  margin-bottom: 10px;
+  resize: vertical;
 }
 
 .save-button,
 .cancel-button,
 .edit-button,
 .delete-button {
-    padding: 7px 12px;
-    margin-right: 8px;
-    margin-top: 14px;
-    cursor: pointer;
-    border-radius: 5px;
-    border: none;
-    color: rgb(15, 15, 15);
-    font-size: small;
-    transition: 0.4s ease;
+  padding: 7px 12px;
+  margin-right: 8px;
+  margin-top: 14px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
+  color: rgb(15, 15, 15);
+  font-size: small;
+  transition: 0.4s ease;
 }
 
 .save-button {
-    background-color: #dcf2d3;
+  background-color: #dcf2d3;
 }
 
 .save-button:hover {
-    background-color: #2b8109;
-    color: white;
+  background-color: #2b8109;
+  color: white;
 }
 
 .cancel-button {
-    background-color: #cbc6c6;
+  background-color: #cbc6c6;
 }
 
 .cancel-button:hover {
-    background-color: #565555;
-    color: white;
+  background-color: #565555;
+  color: white;
 }
 
 .edit-button {
-    background-color: #bfe3f2;
+  background-color: #bfe3f2;
 }
 
 .edit-button:hover {
-    background-color: #0577a8;
-    color: white;
+  background-color: #0577a8;
+  color: white;
 }
 
 .delete-button {
-    background-color: #f1c7c4;
+  background-color: #f1c7c4;
 }
 
 .delete-button:hover {
-    background-color: #be1d12;
-    color: white;
+  background-color: #be1d12;
+  color: white;
 }
