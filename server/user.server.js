@@ -40,21 +40,21 @@ router.post("/", async function (request, response) {
     password: hashedPassword,
   };
 
-  try {
-    const createdUser = await UserAccessor.insertUser(newUser);
-    // response.cookie("username", createdUser.username);
-    return response.json(
-      "Successfully created new user " + createdUser.username,
-    );
-  } catch (error) {
-    if (error.code === 11000 && error.keyPattern && error.keyPattern.username) {
-      // Error code 11000 indicates a duplicate key (unique constraint) violation
-      response.status(400);
-      return response.send("Username is already taken.");
-    } else {
-      // Handle other errors
-      response.status(500);
-      return response.send("Error creating user.");
+
+    try {
+        const createdUser = await UserAccessor.insertUser(newUser);
+        // response.cookie("username", createdUser.username);
+        return response.json("Successfully created new user " + createdUser.username);
+    } catch (error) {
+        if (error.code === 11000 && error.keyPattern && error.keyPattern.username) {
+            // Error code 11000 indicates a duplicate key (unique constraint) violation
+            response.status(409);
+            return response.send("Username is already taken.");
+        } else {
+            // Handle other errors
+            response.status(500);
+            return response.send("Error creating user.");
+        }
     }
   }
 });
