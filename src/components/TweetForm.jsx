@@ -32,7 +32,7 @@ const TweetForm = ({ setIsTweetChange }) => {
             <form className="form-container" onSubmit={handleSubmit}>
                 <div className="input-box">
                     <label htmlFor="content" className="label">
-                        <div className="input-container">
+                        <div className="tweet-input-container">
                             <input type="text" id="content" value={content} onChange={handleInputChange} required placeholder="What's happening?" />
                         </div>
                     </label>
