@@ -47,8 +47,10 @@ const App = () => {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
-            const data = await response.json();
-            return { success: true, data };
+            Cookies.set('username', username, { expires: 1 });
+            setIsLoggedIn(true);
+            setCurrentUser({ username });
+            return { success: true };
         } catch (error) {
             return { success: false, message: error.message };
         }
@@ -57,6 +59,7 @@ const App = () => {
     const handleLogout = () => {
         setIsLoggedIn(false);
         setCurrentUser({});
+        Cookies.remove("username");
     };
 
     useEffect(() => {
@@ -64,6 +67,9 @@ const App = () => {
         if (username) {
             setIsLoggedIn(true);
             setCurrentUser({ username });
+        } else {
+            setIsLoggedIn(false);
+            setCurrentUser({});
         }
     }, []);
 
