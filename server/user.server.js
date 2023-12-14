@@ -47,7 +47,7 @@ router.post("/", async function (request, response) {
     } catch (error) {
         if (error.code === 11000 && error.keyPattern && error.keyPattern.username) {
             // Error code 11000 indicates a duplicate key (unique constraint) violation
-            response.status(400);
+            response.status(409);
             return response.send("Username is already taken.");
         } else {
             // Handle other errors
