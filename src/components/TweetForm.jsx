@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import "../styling/TweetForm.css";
+import PropTypes from "prop-types";
+
 
 const TweetForm = ({ setIsTweetChange }) => {
   const [content, setContent] = useState("");
@@ -29,27 +31,32 @@ const TweetForm = ({ setIsTweetChange }) => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form className="form-container" onSubmit={handleSubmit}>
         <div className="input-box">
-          <label htmlFor="content">Tweet:</label>
-          <div className="input-container">
-            <input
-              type="text"
-              id="content"
-              value={content}
-              onChange={handleInputChange}
-              required
-              placeholder="What's happening?"
-              style={{ width: "400px", height: "200px" }}
-            />
-          </div>
+          <label htmlFor="content" className="label">
+            <div className="tweet-input-container">
+              <input
+                type="text"
+                id="content"
+                value={content}
+                onChange={handleInputChange}
+                required
+                placeholder="What's happening?"
+              />
+            </div>
+          </label>
         </div>
-
-        <button type="submit">Create Tweet</button>
+        <button className="create-button" type="submit">
+          Post
+        </button>
       </form>
       {errorMessage && <p>{errorMessage}</p>}
     </div>
   );
+};
+
+TweetForm.propTypes = {
+  setIsTweetChange: PropTypes.func.isRequired,
 };
 
 export default TweetForm;
