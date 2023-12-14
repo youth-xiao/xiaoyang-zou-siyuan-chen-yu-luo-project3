@@ -29,10 +29,10 @@ db.on("error", console.error.bind(console, "Error connecting to MongoDB:"));
 let frontend_dir = path.join(__dirname, "dist");
 app.use(express.static(frontend_dir));
 app.get("*", function (req, res) {
-  console.log("received request");
-  res.sendFile(path.join(frontend_dir, "index.html"));
+    console.log("received request");
+    res.sendFile(path.join(frontend_dir, "index.html"));
 });
 
 app.listen(process.env.PORT || 3500, function () {
-  console.log("Starting server now...");
+    console.log("Starting server now...");
 });

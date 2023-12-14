@@ -14,7 +14,7 @@ const App = () => {
 
   async function handleLogin(username, password) {
     try {
-      const response = await fetch("api/user/login", {
+      const response = await fetch("/api/user/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -37,7 +37,7 @@ const App = () => {
 
   async function handleSignUp(username, password) {
     try {
-      const response = await fetch("http://localhost:3500/api/user/", {
+      const response = await fetch("/api/user/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
